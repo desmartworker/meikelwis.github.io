@@ -23,6 +23,21 @@
   --border: #dde3ed;
   --mono: 'IBM Plex Mono', monospace;
   --sans: 'IBM Plex Sans', system-ui, sans-serif;
+  --nav-bg: rgba(248,249,252,0.94);
+}
+[data-theme="dark"] {
+  --bg: #0d1117;
+  --bg-off: #161b22;
+  --bg-card: #1a2030;
+  --ink: #e6edf3;
+  --ink-2: #8b949e;
+  --ink-3: #484f58;
+  --ink-4: #2a3040;
+  --accent: #58a6ff;
+  --accent-2: #3fb950;
+  --accent-light: #0d2540;
+  --border: #2a3040;
+  --nav-bg: rgba(13,17,23,0.94);
 }
 html { scroll-behavior: smooth; }
 body { background: var(--bg); color: var(--ink); font-family: var(--sans); font-size: 15px; line-height: 1.7; font-weight: 300; }
@@ -32,7 +47,7 @@ nav {
   position: fixed; top: 0; left: 0; right: 0; z-index: 100;
   display: flex; justify-content: space-between; align-items: center;
   padding: 1rem 5rem;
-  background: rgba(248,249,252,0.94);
+  background: var(--nav-bg);
   backdrop-filter: blur(12px);
   border-bottom: 1px solid var(--border);
 }
@@ -44,7 +59,61 @@ nav {
 .nav-links a { font-size: 13px; font-weight: 400; color: var(--ink-2); text-decoration: none; letter-spacing: 0.02em; transition: color 0.2s; font-family: var(--mono); }
 .nav-links a:hover { color: var(--accent); }
 
-/* HERO */
+/* DARK MODE TOGGLE */
+.theme-toggle {
+  background: none; border: 1px solid var(--border); cursor: pointer;
+  width: 36px; height: 36px; border-radius: 50%;
+  display: flex; align-items: center; justify-content: center;
+  color: var(--ink-2); transition: border-color 0.2s, color 0.2s, background 0.2s;
+  flex-shrink: 0;
+}
+.theme-toggle:hover { border-color: var(--accent); color: var(--accent); background: var(--accent-light); }
+.theme-toggle svg { width: 16px; height: 16px; }
+.icon-sun { display: none; }
+.icon-moon { display: block; }
+[data-theme="dark"] .icon-sun { display: block; }
+[data-theme="dark"] .icon-moon { display: none; }
+
+/* HAMBURGER */
+.nav-hamburger {
+  display: none; flex-direction: column; justify-content: center;
+  gap: 5px; background: none; border: none; cursor: pointer;
+  padding: 4px; width: 36px; height: 36px;
+}
+.nav-hamburger span {
+  display: block; height: 2px; background: var(--ink-2);
+  border-radius: 2px; transition: all 0.3s ease;
+  transform-origin: center;
+}
+.nav-hamburger.open span:nth-child(1) { transform: translateY(7px) rotate(45deg); }
+.nav-hamburger.open span:nth-child(2) { opacity: 0; transform: scaleX(0); }
+.nav-hamburger.open span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
+
+/* MOBILE DRAWER */
+.nav-mobile {
+  display: none; position: fixed; top: 61px; left: 0; right: 0;
+  background: var(--nav-bg); backdrop-filter: blur(12px);
+  border-bottom: 1px solid var(--border); z-index: 99;
+  flex-direction: column; padding: 0;
+  transform: translateY(-8px); opacity: 0;
+  transition: transform 0.25s ease, opacity 0.25s ease;
+  pointer-events: none;
+}
+.nav-mobile.open {
+  transform: translateY(0); opacity: 1; pointer-events: all;
+}
+.nav-mobile a {
+  display: block; padding: 1rem 1.5rem;
+  font-family: var(--mono); font-size: 13px; font-weight: 400;
+  color: var(--ink-2); text-decoration: none; letter-spacing: 0.04em;
+  border-bottom: 1px solid var(--border);
+  transition: background 0.15s, color 0.15s;
+}
+.nav-mobile a:hover { background: var(--accent-light); color: var(--accent); }
+.nav-mobile a:last-child { border-bottom: none; }
+
+/* NAV RIGHT GROUP */
+.nav-right { display: flex; align-items: center; gap: 1rem; }
 #hero {
   min-height: 100vh; display: grid; grid-template-columns: 1fr 1fr;
   align-items: center; padding: 7rem 5rem 5rem; gap: 5rem;
@@ -247,6 +316,8 @@ footer {
 @media (max-width: 900px) {
   nav { padding: 1rem 1.5rem; }
   .nav-links { display: none; }
+  .nav-hamburger { display: flex; }
+  .nav-mobile { display: flex; }
   section { padding: 4rem 1.5rem; }
   #hero { grid-template-columns: 1fr; padding: 6rem 1.5rem 3rem; gap: 2.5rem; }
   .hero-right { grid-template-columns: 1fr 1fr; }
@@ -272,14 +343,32 @@ footer {
       <div class="nav-brand-role">Analytics Engineer</div>
     </div>
   </a>
-  <ul class="nav-links">
-    <li><a href="#about">about</a></li>
-    <li><a href="#skills">stack</a></li>
-    <li><a href="#experience">experience</a></li>
-    <li><a href="#projects">projects</a></li>
-    <li><a href="#contact">contact</a></li>
-  </ul>
+  <div class="nav-right">
+    <ul class="nav-links">
+      <li><a href="#about">about</a></li>
+      <li><a href="#skills">stack</a></li>
+      <li><a href="#experience">experience</a></li>
+      <li><a href="#projects">projects</a></li>
+      <li><a href="#contact">contact</a></li>
+    </ul>
+    <button class="theme-toggle" id="themeToggle" aria-label="Toggle dark mode">
+      <svg class="icon-moon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
+      <svg class="icon-sun" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="5"/><line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/><line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/></svg>
+    </button>
+    <button class="nav-hamburger" id="navHamburger" aria-label="Toggle menu">
+      <span></span><span></span><span></span>
+    </button>
+  </div>
 </nav>
+
+<!-- Mobile Nav Drawer -->
+<div class="nav-mobile" id="navMobile">
+  <a href="#about" class="nav-mobile-link">about</a>
+  <a href="#skills" class="nav-mobile-link">stack</a>
+  <a href="#experience" class="nav-mobile-link">experience</a>
+  <a href="#projects" class="nav-mobile-link">projects</a>
+  <a href="#contact" class="nav-mobile-link">contact</a>
+</div>
 
 <section id="hero">
   <div class="hero-left">
@@ -623,12 +712,39 @@ footer {
 </footer>
 
 <script>
+  // Reveal on scroll
   const obs = new IntersectionObserver(entries => {
     entries.forEach(e => {
       if (e.isIntersecting) { e.target.classList.add('visible'); obs.unobserve(e.target); }
     });
   }, { threshold: 0.08 });
   document.querySelectorAll('.reveal').forEach(el => obs.observe(el));
+
+  // Dark mode toggle
+  const themeToggle = document.getElementById('themeToggle');
+  const savedTheme = localStorage.getItem('theme') || 'light';
+  document.documentElement.setAttribute('data-theme', savedTheme);
+  themeToggle.addEventListener('click', () => {
+    const current = document.documentElement.getAttribute('data-theme');
+    const next = current === 'dark' ? 'light' : 'dark';
+    document.documentElement.setAttribute('data-theme', next);
+    localStorage.setItem('theme', next);
+  });
+
+  // Hamburger menu
+  const hamburger = document.getElementById('navHamburger');
+  const mobileNav = document.getElementById('navMobile');
+  hamburger.addEventListener('click', () => {
+    const isOpen = hamburger.classList.toggle('open');
+    mobileNav.classList.toggle('open', isOpen);
+  });
+  // Close mobile nav when a link is clicked
+  document.querySelectorAll('.nav-mobile-link').forEach(link => {
+    link.addEventListener('click', () => {
+      hamburger.classList.remove('open');
+      mobileNav.classList.remove('open');
+    });
+  });
 </script>
 </body>
 </html>
