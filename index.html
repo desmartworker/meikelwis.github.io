@@ -275,14 +275,31 @@ h2 {
 
 /* CERTS */
 #certifications { background: var(--bg-card); border-top: 1px solid var(--border); }
-.certs-table { width: 100%; border-collapse: collapse; }
-.certs-table tr { border-bottom: 1px solid var(--border); }
-.certs-table tr:first-child { border-top: 1px solid var(--border); }
-.certs-table tr:hover { background: var(--accent-light); }
-.certs-table td { padding: 0.9rem 0.5rem; vertical-align: middle; }
-.cert-name-col { font-size: 13px; color: var(--ink); font-weight: 400; width: 50%; }
-.cert-issuer-col { font-family: var(--mono); font-size: 11px; color: var(--ink-3); width: 30%; }
-.cert-date-col { font-family: var(--mono); font-size: 11px; color: var(--ink-3); text-align: right; }
+.certs-list { display: grid; border-top: 1px solid var(--border); }
+.cert-row {
+  display: grid;
+  grid-template-columns: 1fr 200px 100px;
+  align-items: center;
+  gap: 1rem;
+  padding: 0.9rem 0;
+  border-bottom: 1px solid var(--border);
+  transition: background 0.15s;
+}
+.cert-row:hover { background: var(--accent-light); }
+.cert-name { font-size: 13px; color: var(--ink); font-weight: 400; }
+.cert-issuer { font-family: var(--mono); font-size: 11px; color: var(--ink-3); }
+.cert-date { font-family: var(--mono); font-size: 11px; color: var(--ink-3); text-align: right; white-space: nowrap; }
+@media (max-width: 680px) {
+  .cert-row {
+    grid-template-columns: 1fr auto;
+    grid-template-rows: auto auto;
+    row-gap: 0.2rem;
+    column-gap: 0.75rem;
+  }
+  .cert-name { grid-column: 1 / 2; grid-row: 1; }
+  .cert-issuer { grid-column: 1 / 2; grid-row: 2; font-size: 10px; }
+  .cert-date { grid-column: 2 / 3; grid-row: 1 / 3; align-self: center; font-size: 10px; }
+}
 
 /* CONTACT */
 #contact { background: var(--bg); }
@@ -330,6 +347,93 @@ footer {
   .edu-row { grid-template-columns: 1fr; }
   .contact-grid { grid-template-columns: 1fr; gap: 3rem; }
   footer { padding: 1.5rem; flex-direction: column; gap: 0.4rem; }
+}
+
+/* ==================== PRINT / PDF ==================== */
+@media print {
+  @page {
+    size: A4;
+    margin: 18mm 16mm 18mm 16mm;
+  }
+
+  /* Reset backgrounds & show all colours */
+  *, *::before, *::after {
+    -webkit-print-color-adjust: exact !important;
+    print-color-adjust: exact !important;
+    box-shadow: none !important;
+  }
+
+  /* Force reveal elements visible */
+  .reveal { opacity: 1 !important; transform: none !important; }
+
+  /* Hide nav, hamburger, mobile drawer, theme toggle, dot-grid bg */
+  nav, .nav-mobile, .nav-hamburger, .theme-toggle { display: none !important; }
+
+  /* Reset body */
+  body { font-size: 10pt; line-height: 1.6; background: #fff; color: #0d1117; }
+
+  /* Remove fixed/sticky positioning */
+  nav { position: static; }
+
+  /* Hero — single column, compact */
+  #hero {
+    min-height: unset;
+    grid-template-columns: 1fr 1fr;
+    padding: 2rem 0 1.5rem;
+    gap: 2rem;
+    background-image: none;
+    page-break-after: avoid;
+  }
+  h1 { font-size: 28pt; }
+  .h1-sub { font-size: 11pt; }
+  .hero-bio { font-size: 9.5pt; }
+  .hero-actions { display: none; }
+  .hero-right { grid-template-columns: 1fr 1fr; }
+  .hero-metric { padding: 1rem; }
+  .metric-val { font-size: 18pt; }
+
+  /* Sections */
+  section { padding: 1.5rem 0; border: none !important; }
+  section + section { border-top: 1px solid #dde3ed !important; }
+
+  /* Avoid breaking inside key blocks */
+  .exp-item, .project-item, .edu-item, .cert-row, .skill-block { page-break-inside: avoid; }
+
+  /* About */
+  .about-grid { grid-template-columns: 1fr 1fr; gap: 2rem; }
+
+  /* Skills — 3-col stays */
+  .skills-grid { grid-template-columns: repeat(3, 1fr); }
+
+  /* Experience */
+  .exp-item { grid-template-columns: 140px 1fr; gap: 0 2rem; padding: 1.2rem 0; }
+
+  /* Projects — hide image panels to save space */
+  .project-visual { display: none; }
+  .project-item { grid-template-columns: 1fr; }
+  .project-item.reverse { direction: ltr; }
+  .project-body { padding: 1rem 0; }
+
+  /* Contrib logos */
+  .contrib-logos { grid-template-columns: repeat(5, 1fr); }
+  .contrib-logo-item { padding: 1rem; }
+
+  /* Education */
+  .edu-row { grid-template-columns: 1fr 1fr; }
+
+  /* Certs */
+  .cert-row { grid-template-columns: 1fr 160px 80px; padding: 0.5rem 0; }
+  .cert-name { font-size: 9pt; }
+  .cert-issuer, .cert-date { font-size: 8pt; }
+
+  /* Contact */
+  .contact-grid { grid-template-columns: 1fr 1fr; gap: 2rem; }
+
+  /* Footer */
+  footer { padding: 0.75rem 0; }
+
+  /* Links — show URL inline for certs/contact */
+  a[href]::after { content: none; }
 }
 </style>
 </head>
@@ -670,20 +774,20 @@ footer {
   <div class="sec-eyebrow">Certifications</div>
   <h2>Licenses &amp; Certificates</h2>
   <p class="sec-sub">Continuous learning across cloud platforms, databases, and analytics tools.</p>
-  <table class="certs-table reveal">
-    <tr><td class="cert-name-col">Analyze and Visualize Looker Data</td><td class="cert-issuer-col">Google Cloud</td><td class="cert-date-col">Dec 2025</td></tr>
-    <tr><td class="cert-name-col">Derive Insights from BigQuery Data</td><td class="cert-issuer-col">Google Cloud</td><td class="cert-date-col">Dec 2025</td></tr>
-    <tr><td class="cert-name-col">Introduction to Data Engineering on Google Cloud</td><td class="cert-issuer-col">Google Cloud</td><td class="cert-date-col">Dec 2025</td></tr>
-    <tr><td class="cert-name-col">IT Specialist – Data Analytics</td><td class="cert-issuer-col">Certiport / Pearson VUE</td><td class="cert-date-col">Nov 2022</td></tr>
-    <tr><td class="cert-name-col">Introduction to Programming Using Python</td><td class="cert-issuer-col">She Loves Data</td><td class="cert-date-col">Nov 2022</td></tr>
-    <tr><td class="cert-name-col">IT Specialist – Databases</td><td class="cert-issuer-col">Certiport / Pearson VUE</td><td class="cert-date-col">Oct 2022</td></tr>
-    <tr><td class="cert-name-col">Microsoft Office Specialist: Excel Associate &amp; Expert</td><td class="cert-issuer-col">Microsoft</td><td class="cert-date-col">Sep 2022</td></tr>
-    <tr><td class="cert-name-col">First Look: MySQL 8 for Developers</td><td class="cert-issuer-col">LinkedIn</td><td class="cert-date-col">Dec 2021</td></tr>
-    <tr><td class="cert-name-col">SQL (Intermediate)</td><td class="cert-issuer-col">HackerRank</td><td class="cert-date-col">Oct 2021</td></tr>
-    <tr><td class="cert-name-col">Google Tag Manager Fundamentals</td><td class="cert-issuer-col">Google</td><td class="cert-date-col">Sep 2020</td></tr>
-    <tr><td class="cert-name-col">Advanced Google Analytics</td><td class="cert-issuer-col">Google</td><td class="cert-date-col">May 2020</td></tr>
-    <tr><td class="cert-name-col">Joining Data in SQL / Introduction to SQL</td><td class="cert-issuer-col">DataCamp</td><td class="cert-date-col">2020</td></tr>
-  </table>
+  <div class="certs-list reveal">
+    <div class="cert-row"><span class="cert-name">Analyze and Visualize Looker Data</span><span class="cert-issuer">Google Cloud</span><span class="cert-date">Dec 2025</span></div>
+    <div class="cert-row"><span class="cert-name">Derive Insights from BigQuery Data</span><span class="cert-issuer">Google Cloud</span><span class="cert-date">Dec 2025</span></div>
+    <div class="cert-row"><span class="cert-name">Introduction to Data Engineering on Google Cloud</span><span class="cert-issuer">Google Cloud</span><span class="cert-date">Dec 2025</span></div>
+    <div class="cert-row"><span class="cert-name">IT Specialist – Data Analytics</span><span class="cert-issuer">Certiport / Pearson VUE</span><span class="cert-date">Nov 2022</span></div>
+    <div class="cert-row"><span class="cert-name">Introduction to Programming Using Python</span><span class="cert-issuer">She Loves Data</span><span class="cert-date">Nov 2022</span></div>
+    <div class="cert-row"><span class="cert-name">IT Specialist – Databases</span><span class="cert-issuer">Certiport / Pearson VUE</span><span class="cert-date">Oct 2022</span></div>
+    <div class="cert-row"><span class="cert-name">Microsoft Office Specialist: Excel Associate &amp; Expert</span><span class="cert-issuer">Microsoft</span><span class="cert-date">Sep 2022</span></div>
+    <div class="cert-row"><span class="cert-name">First Look: MySQL 8 for Developers</span><span class="cert-issuer">LinkedIn</span><span class="cert-date">Dec 2021</span></div>
+    <div class="cert-row"><span class="cert-name">SQL (Intermediate)</span><span class="cert-issuer">HackerRank</span><span class="cert-date">Oct 2021</span></div>
+    <div class="cert-row"><span class="cert-name">Google Tag Manager Fundamentals</span><span class="cert-issuer">Google</span><span class="cert-date">Sep 2020</span></div>
+    <div class="cert-row"><span class="cert-name">Advanced Google Analytics</span><span class="cert-issuer">Google</span><span class="cert-date">May 2020</span></div>
+    <div class="cert-row"><span class="cert-name">Joining Data in SQL / Introduction to SQL</span><span class="cert-issuer">DataCamp</span><span class="cert-date">2020</span></div>
+  </div>
 </section>
 
 <section id="contact">
