@@ -1265,6 +1265,33 @@ footer {
 }
 @media print{.mw-tl .exp-points{max-height:none!important;opacity:1!important}.mw-more,.mw-expand-all{display:none!important}.mw-durbar i{width:var(--w)!important}}
 
+/* ===== staged reveals ===== */
+.mw-wait{opacity:0}
+.mw-play{animation:mwSeq .6s cubic-bezier(.2,.8,.2,1) var(--d,0s) backwards}
+@keyframes mwSeq{from{opacity:0;transform:translateY(14px)}to{opacity:1;transform:none}}
+
+/* ===== guided tour ===== */
+.mw-tour-fab{position:fixed;right:24px;bottom:24px;z-index:140;display:inline-flex;align-items:center;gap:.5rem;padding:.6rem 1rem;background:var(--accent);color:#fff;border:none;cursor:pointer;font-family:var(--mono);font-size:11px;letter-spacing:.06em;text-transform:uppercase;box-shadow:0 10px 30px -12px color-mix(in srgb,var(--accent) 70%,transparent);opacity:0;transform:translateY(12px);pointer-events:none;transition:opacity .3s,transform .3s,background .2s}
+[data-theme="dark"] .mw-tour-fab{color:#0d1117}
+.mw-tour-fab.show{opacity:1;transform:none;pointer-events:auto}
+.mw-tour-fab:hover{filter:brightness(1.08)}
+.mw-tour-fab::before{content:'';border-left:7px solid currentColor;border-top:4.5px solid transparent;border-bottom:4.5px solid transparent}
+.mw-tour{position:fixed;left:50%;bottom:20px;z-index:150;width:min(580px,calc(100% - 32px));background:var(--bg-card);border:1px solid var(--border);box-shadow:0 24px 60px -24px rgba(13,17,23,.45);transform:translate(-50%,24px);opacity:0;pointer-events:none;transition:opacity .3s,transform .3s}
+.mw-tour.show{opacity:1;transform:translate(-50%,0);pointer-events:auto}
+.mw-tour-top{display:flex;align-items:center;gap:.75rem;padding:.8rem 1rem .2rem}
+.mw-tour-step{font-family:var(--mono);font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:var(--accent)}
+.mw-tour-step i{font-style:normal;color:var(--ink-3)}
+.mw-tour-btns{margin-left:auto;display:flex;gap:4px}
+.mw-tour-btns button{width:30px;height:30px;display:inline-flex;align-items:center;justify-content:center;background:var(--bg);border:1px solid var(--border);color:var(--ink-2);cursor:pointer;font-family:var(--mono);font-size:12px;line-height:1}
+.mw-tour-btns button:hover{border-color:var(--accent);color:var(--accent)}
+.mw-tour-cap{padding:.1rem 1rem .85rem;font-size:14px;color:var(--ink);line-height:1.6}
+.mw-tour-cap small{display:block;font-family:var(--mono);font-size:10px;color:var(--ink-3);margin-top:.2rem;letter-spacing:.04em}
+.mw-tour-prog{height:2px;background:var(--bg-off)}
+.mw-tour-prog i{display:block;height:100%;background:linear-gradient(90deg,var(--accent),var(--accent-2));transform:scaleX(0);transform-origin:left}
+.mw-tour-on .mw-tour-focus .sec-eyebrow{color:var(--accent-2)}
+@media (max-width:600px){.mw-tour-fab{right:16px;bottom:16px}.mw-tour{bottom:12px}.mw-tour-cap{font-size:13px}}
+@media print{.mw-wait{opacity:1!important}.mw-tour,.mw-tour-fab{display:none!important}}
+
 @media (prefers-reduced-motion: reduce){
   .mw-con-st::before,.mw-con-q .cur{animation:none}
   .mw-con-r tr.row,.mw-rail-fill{transition:none}
@@ -1349,9 +1376,9 @@ footer {
     if(reduce || !tn) return;
     tn.nodeValue='0'; if(fill) fill.style.width='0';
     onView(m,function(){
-      var t0=performance.now()+k*140, d=1400;
+      var t0=performance.now()+650+k*140, d=1400;
       requestAnimationFrame(function f(t){ var p=Math.min(1,Math.max(0,(t-t0)/d)), e=1-Math.pow(1-p,3); tn.nodeValue=String(Math.round(target*e)); if(p<1) requestAnimationFrame(f); });
-      if(fill) setTimeout(function(){ fill.style.width=w; },80+k*140);
+      if(fill) setTimeout(function(){ fill.style.width=w; },700+k*140);
     },0.3);
   });
 
@@ -1609,7 +1636,7 @@ footer {
       })();
     };
     if(reduce){ qEl.innerHTML=hl(QUERIES[0].sql); renderRows(QUERIES[0],false); }
-    else onView(con,runQuery,0.3);
+    else onView(con,function(){ setTimeout(runQuery,1300); },0.3);
   }
 
   /* ---------- visual work history ---------- */
@@ -1669,6 +1696,107 @@ footer {
     allBtn.addEventListener('click',function(){
       var open=!meta.every(function(m){ return m.it.classList.contains('mw-open'); });
       meta.forEach(function(m){ setOpen(m.it,open); }); allBtn.textContent=open?'collapse all':'expand all details';
+    });
+  }
+
+  /* ---------- staged reveals: hero intro + in-section sequencing ---------- */
+  var play=function(n,delay){ n.style.setProperty('--d',delay+'s'); n.classList.remove('mw-wait'); n.classList.add('mw-play');
+    n.addEventListener('animationend',function h(e){ if(e.target===n){ n.classList.remove('mw-play'); n.removeEventListener('animationend',h); } }); };
+  if(!reduce){
+    var heroSeq=$$('#hero .hero-tag, #hero h1, #hero .h1-sub, #hero .hero-bio, #hero .hero-actions, #hero .hero-metric, #hero .mw-console');
+    heroSeq.forEach(function(n){ n.classList.add('mw-wait'); });
+    requestAnimationFrame(function(){ heroSeq.forEach(function(n,i){ play(n, i<5 ? i*0.12 : 0.6+(i-5)*0.12); }); });
+
+    var SEQ='.sec-eyebrow, h2, .sec-sub, .about-copy p, .sidebar-item, .mw-pipe, .skill-block, .mw-viz > .mw-card, .mw-expand-all, .exp-item, .project-item, .contrib-logo-item, .edu-item, .mw-cert, .cert-row, .contact-copy, .contact-item';
+    var seqEls=[];
+    $$('section').forEach(function(sec){ if(sec.id==='hero') return; $$(SEQ,sec).forEach(function(n){ if(seqEls.indexOf(n)===-1 && !n.closest('[hidden]')) seqEls.push(n); }); });
+    // avoid double-animating children whose parent is also sequenced
+    seqEls=seqEls.filter(function(n){ return !seqEls.some(function(p){ return p!==n && p.contains(n); }); });
+    if('IntersectionObserver' in window){
+      seqEls.forEach(function(n){ n.classList.add('mw-wait'); });
+      var seqObs=new IntersectionObserver(function(es){
+        var vis=es.filter(function(e){ return e.isIntersecting; }).map(function(e){ return e.target; })
+                  .sort(function(a,b){ return a.getBoundingClientRect().top-b.getBoundingClientRect().top; });
+        vis.forEach(function(n,i){ play(n,Math.min(i*0.1,0.9)); seqObs.unobserve(n); });
+      },{threshold:0.12,rootMargin:'0px 0px -6% 0px'});
+      seqEls.forEach(function(n){ seqObs.observe(n); });
+    }
+  }
+
+  /* ---------- guided tour ---------- */
+  var TOUR=[
+    ['about','About','Who I am and where I work today.'],
+    ['mw-pipeline','Workflow','How data flows through what I build.','Tip: click any stage to explore it.'],
+    ['skills','Stack','The tools I work with, plus where I’m heading next.','Tip: click a tool to filter my work history.'],
+    ['experience','Experience','Each role at a glance: headline numbers, focus areas and tools.','Tip: “show details” opens the full story.'],
+    ['projects','Projects','Companies and platforms I’ve helped build data for.'],
+    ['education','Education','Information technology roots, advancing into data analytics.'],
+    ['certifications','Certifications','Continuous learning across cloud, databases and analytics.','Tip: click a year to filter.'],
+    ['contact','Contact','Open to analytics engineering, BI and data roles. Let’s talk.']
+  ].filter(function(t){ return document.getElementById(t[0]); });
+  if(TOUR.length){
+    var DWELL=3000, SCROLL_MS=reduce?0:800, STEP=DWELL+SCROLL_MS;
+    var fab=el('button','mw-tour-fab','take the tour'); fab.type='button'; document.body.appendChild(fab);
+    var bar=el('div','mw-tour',
+      '<div class="mw-tour-top"><span class="mw-tour-step"></span><span class="mw-tour-btns">'+
+      '<button type="button" data-a="prev" aria-label="Previous section">‹</button>'+
+      '<button type="button" data-a="pause" aria-label="Pause tour">❚❚</button>'+
+      '<button type="button" data-a="next" aria-label="Next section">›</button>'+
+      '<button type="button" data-a="exit" aria-label="Exit tour">✕</button></span></div>'+
+      '<div class="mw-tour-cap" aria-live="polite"></div><div class="mw-tour-prog"><i></i></div>');
+    bar.setAttribute('role','region'); bar.setAttribute('aria-label','Guided tour');
+    document.body.appendChild(bar);
+    var stepEl=$('.mw-tour-step',bar), capEl=$('.mw-tour-cap',bar), progEl=$('.mw-tour-prog i',bar), pauseBtn=$('[data-a="pause"]',bar);
+    var idx=-1, running=false, paused=false, tmr=null, startT=0, remain=STEP;
+
+    // hero entry point + floating button once the hero is scrolled past
+    var acts=$('#hero .hero-actions');
+    if(acts){ var hl2=el('a','btn-ghost','take_tour()'); hl2.href='#about'; hl2.addEventListener('click',function(e){ e.preventDefault(); startTour(); }); acts.appendChild(hl2); }
+    var heroEl=$('#hero');
+    var fabUpdate=function(){ fab.classList.toggle('show', !running && (!heroEl || heroEl.getBoundingClientRect().bottom<innerHeight*0.35)); };
+    addEventListener('scroll',fabUpdate,{passive:true}); fabUpdate();
+    fab.addEventListener('click',function(){ startTour(); });
+
+    var setProg=function(ms){
+      if(!ms){ progEl.style.transition='none'; progEl.style.transform='scaleX(0)'; return; }
+      void progEl.offsetWidth; progEl.style.transition='transform '+ms+'ms linear'; progEl.style.transform='scaleX(1)';
+    };
+    var freezeProg=function(){ var m=getComputedStyle(progEl).transform, sx=1; if(m&&m!=='none'){ sx=parseFloat(m.split('(')[1]); } progEl.style.transition='none'; progEl.style.transform='scaleX('+sx+')'; };
+    var arm=function(ms){ clearTimeout(tmr); startT=performance.now(); remain=ms; setProg(ms); tmr=setTimeout(function(){ idx<TOUR.length-1 ? go(idx+1) : finish(); },ms); };
+    var go=function(i){
+      idx=Math.max(0,Math.min(TOUR.length-1,i)); var t=TOUR[idx], sec=document.getElementById(t[0]);
+      $$('.mw-tour-focus').forEach(function(n){ n.classList.remove('mw-tour-focus'); }); sec.classList.add('mw-tour-focus');
+      sec.scrollIntoView({behavior:reduce?'auto':'smooth',block:'start'});
+      stepEl.innerHTML=(idx<9?'0':'')+(idx+1)+' <i>/ '+(TOUR.length<10?'0':'')+TOUR.length+'</i> · '+esc(t[1]);
+      capEl.innerHTML=esc(t[2])+(t[3]?'<small>'+esc(t[3])+'</small>':'');
+      setProg(0);
+      if(paused){ remain=STEP; return; }
+      arm(STEP);
+    };
+    var setPaused=function(v){
+      if(!running) return; paused=v;
+      pauseBtn.textContent=v?'▶':'❚❚'; pauseBtn.setAttribute('aria-label',v?'Resume tour':'Pause tour');
+      if(v){ clearTimeout(tmr); remain=Math.max(0,remain-(performance.now()-startT)); freezeProg(); }
+      else { var m=getComputedStyle(progEl).transform, sx=(m&&m!=='none')?parseFloat(m.split('(')[1]):0; if(sx>=0.999||remain<200){ arm(STEP); } else { clearTimeout(tmr); startT=performance.now(); void progEl.offsetWidth; progEl.style.transition='transform '+remain+'ms linear'; progEl.style.transform='scaleX(1)'; tmr=setTimeout(function(){ idx<TOUR.length-1 ? go(idx+1) : finish(); },remain); } }
+    };
+    var startTour=function(){ running=true; paused=false; pauseBtn.textContent='❚❚'; document.documentElement.classList.add('mw-tour-on'); bar.classList.add('show'); fabUpdate(); go(0); };
+    var stopTour=function(){ running=false; clearTimeout(tmr); bar.classList.remove('show'); document.documentElement.classList.remove('mw-tour-on'); $$('.mw-tour-focus').forEach(function(n){ n.classList.remove('mw-tour-focus'); }); fabUpdate(); };
+    var finish=function(){ clearTimeout(tmr); stepEl.innerHTML='Tour complete'; capEl.innerHTML='Thanks for taking a look. Explore anything you like, or get in touch.'; setProg(0); tmr=setTimeout(stopTour,3500); };
+
+    $$('.mw-tour-btns button',bar).forEach(function(b){ b.addEventListener('click',function(){
+      var a=b.getAttribute('data-a');
+      if(a==='exit') stopTour(); else if(a==='pause') setPaused(!paused);
+      else { var was=paused; paused=false; pauseBtn.textContent='❚❚'; go(idx+(a==='next'?1:-1)); if(was) setPaused(true); }
+    }); });
+    // the visitor takes over: pause so they can read and interact
+    var userAct=function(e){ if(running && !paused && !bar.contains(e.target) && e.target!==fab) setPaused(true); };
+    addEventListener('wheel',userAct,{passive:true}); addEventListener('touchmove',userAct,{passive:true}); document.addEventListener('pointerdown',userAct);
+    document.addEventListener('keydown',function(e){
+      if(!running) return;
+      if(e.key==='Escape') stopTour();
+      else if(e.key==='ArrowRight'){ e.preventDefault(); go(idx+1); }
+      else if(e.key==='ArrowLeft'){ e.preventDefault(); go(idx-1); }
+      else if(e.key===' '&&!/input|textarea|button/i.test(e.target.tagName)){ e.preventDefault(); setPaused(!paused); }
     });
   }
 })();
