@@ -681,7 +681,7 @@ footer {
       <div class="about-copy" style="margin-top:1.5rem;">
         <p>I'm an Analytics Engineer and BI professional specializing in translating raw data into reliable, scalable systems. My work spans <strong>fintech</strong>, <strong>e-commerce</strong>, and <strong>retail</strong> — building data warehouses, defining company-wide metrics, and delivering executive dashboards from the ground up.</p>
         <p>Currently at <strong>CloudMile</strong> — a leading Google Cloud partner — designing Snowflake and dbt infrastructure that empowers non-technical stakeholders to make data-driven decisions independently.</p>
-        <p>Graduated with the <strong>Master's in Accounting Data Analytics</strong> at Universitas Indonesia, expanding into data architecture, product management, and AI applications.</p>
+        <p>Graduated with the <strong>Master's in Accounting Data Analytics</strong> at University of Indonesia, expanding into data architecture, product management, and AI applications.</p>
       </div>
     </div>
     <div>
@@ -695,7 +695,7 @@ footer {
       </div>
       <div class="sidebar-item">
         <div class="sidebar-key">Education</div>
-        <div class="sidebar-val">M.S. Accounting Data Analytics · Universitas Indonesia</div>
+        <div class="sidebar-val">M.S. Accounting Data Analytics · University of Indonesia</div>
       </div>
       <div class="sidebar-item">
         <div class="sidebar-key">Focus</div>
@@ -740,6 +740,13 @@ footer {
         <li>Celery &amp; Redis</li><li>MoEngage · Appsflyer</li>
         <li>Google Tag Manager</li>
       </ul>
+    </div>
+    <div class="skill-block mw-explore">
+      <div class="skill-block-head">// ai &amp; now exploring</div>
+      <ul class="skill-list">
+        <li>AI Applications</li><li>Data Architecture</li><li>Product Management</li>
+      </ul>
+      <p class="mw-explore-note">Where my Master's in Accounting Data Analytics is taking me next: AI-ready data foundations and the products built on them.</p>
     </div>
   </div>
 </section>
@@ -923,7 +930,7 @@ footer {
   <div class="edu-row reveal">
     <div class="edu-item">
       <div class="edu-deg">Master Program in Accounting Data Analytics</div>
-      <div class="edu-uni">Universitas Indonesia</div>
+      <div class="edu-uni">University of Indonesia</div>
       <div class="edu-yr">2024 — 2025</div>
     </div>
     <div class="edu-item">
@@ -1014,5 +1021,659 @@ footer {
     });
   });
 </script>
+<!-- =====================================================================
+     INTERACTIVE ENHANCEMENTS for Meikelwis Wijaya's portfolio
+     HOW TO USE: paste this whole block just BEFORE the closing </body> tag
+     (after your existing <script>). Nothing else in your file needs to change,
+     so your embedded logos and images stay exactly as they are.
+
+     Adds:
+       - scroll progress bar + active nav highlighting
+       - typing role line, count-up hero metrics, animated metric bars
+       - new "Workflow" section: animated, clickable data-pipeline diagram
+       - career timeline chart + "tools across roles" chart (built from your
+         own experience tags) with click-to-filter on roles
+       - click any stack item or tag to filter the work history
+       - animated CleverTap −30% impact bars on the Ula role
+       - certificates-per-year chart with click-to-filter
+       - cursor spotlight on cards; respects reduced-motion + print
+     ===================================================================== -->
+<style id="mw-enhance-css">
+.mw-progress{position:fixed;top:0;left:0;height:2px;width:100%;transform-origin:0 50%;transform:scaleX(0);background:linear-gradient(90deg,var(--accent),var(--accent-2));z-index:101;pointer-events:none}
+.nav-links a{position:relative}
+.nav-links a.active{color:var(--accent)}
+.nav-links a.active::after{content:'';position:absolute;left:0;right:0;bottom:-4px;height:1px;background:var(--accent)}
+.nav-mobile a.active{color:var(--accent)}
+.h1-sub{min-height:1.7em}
+.mw-caret{display:inline-block;width:.55em;border-bottom:2px solid var(--accent);margin-left:2px;animation:blink 1s steps(1) infinite}
+.metric-bar-fill{transition:width 1.4s cubic-bezier(.2,.8,.2,1)}
+
+/* cursor spotlight */
+.mw-spot{position:relative}
+.mw-spot::after{content:'';position:absolute;inset:0;pointer-events:none;opacity:0;transition:opacity .3s;background:radial-gradient(260px circle at var(--mx,50%) var(--my,50%),color-mix(in srgb,var(--accent) 12%,transparent),transparent 70%)}
+.mw-spot:hover::after{opacity:1}
+
+/* tooltip */
+.mw-tip{position:fixed;left:0;top:0;z-index:200;pointer-events:none;opacity:0;transition:opacity .15s;background:var(--ink);color:var(--bg);font-family:var(--mono);font-size:11px;line-height:1.6;padding:.55rem .75rem;max-width:270px}
+.mw-tip b{font-weight:500}
+
+/* pipeline */
+#mw-pipeline{background:var(--bg);border-bottom:1px solid var(--border)}
+.mw-pipe{border:1px solid var(--border);background:var(--bg-card)}
+.mw-pipe svg{display:block;width:100%;height:auto}
+.mw-edge{stroke:var(--ink-4);stroke-width:2;stroke-dasharray:4 8;animation:mwDash 1.2s linear infinite;fill:none}
+@keyframes mwDash{to{stroke-dashoffset:-24}}
+.mw-packet{fill:var(--accent-2)}
+.mw-n{cursor:pointer}
+.mw-node{fill:var(--bg-card);stroke:var(--accent);stroke-width:2;transition:fill .3s}
+.mw-num{font-family:var(--mono);font-size:17px;fill:var(--accent);text-anchor:middle;dominant-baseline:central;pointer-events:none;transition:fill .3s}
+.mw-ring{fill:none;stroke:var(--accent);stroke-width:1.5;opacity:0}
+.mw-n:hover .mw-node{fill:var(--accent-light)}
+.mw-n.on .mw-node{fill:var(--accent)}
+.mw-n.on .mw-num{fill:var(--bg)}
+.mw-n.on .mw-ring{animation:mwRing 1.8s ease-out infinite;transform-box:fill-box;transform-origin:center}
+@keyframes mwRing{0%{opacity:.6;transform:scale(1)}100%{opacity:0;transform:scale(1.9)}}
+.mw-stages{display:grid;grid-template-columns:repeat(5,1fr);border-top:1px solid var(--border)}
+.mw-stage{background:var(--bg-card);border:none;border-right:1px solid var(--border);padding:.9rem 1rem;cursor:pointer;font:inherit;text-align:center;transition:background .2s}
+.mw-stage:last-child{border-right:none}
+.mw-stage:hover{background:var(--bg-off)}
+.mw-stage .k{display:block;font-family:var(--mono);font-size:10px;letter-spacing:.1em;text-transform:uppercase;color:var(--ink-3)}
+.mw-stage .t{display:block;font-size:13px;font-weight:500;color:var(--ink);margin-top:2px}
+.mw-stage[aria-pressed="true"]{background:var(--accent-light);box-shadow:inset 0 2px 0 var(--accent)}
+.mw-stage[aria-pressed="true"] .k{color:var(--accent)}
+.mw-detail{display:grid;grid-template-columns:220px 1fr;gap:2rem;padding:1.5rem 1.75rem;border-top:1px solid var(--border);min-height:130px}
+.mw-detail .k{font-family:var(--mono);font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:var(--accent)}
+.mw-detail h3{font-size:1.3rem;font-weight:600;color:var(--ink);letter-spacing:-.01em;margin-top:.2rem}
+.mw-detail p{font-size:14px;color:var(--ink-2);line-height:1.8}
+.mw-chips{display:flex;flex-wrap:wrap;gap:5px;margin-top:.8rem}
+.mw-chips span{font-family:var(--mono);font-size:10px;padding:2px 8px;border:1px solid var(--border);background:var(--bg-off);color:var(--ink-2)}
+.mw-in{animation:mwIn .4s ease}
+@keyframes mwIn{from{opacity:0;transform:translateY(6px)}}
+
+/* experience charts */
+.mw-viz{display:grid;grid-template-columns:1.6fr 1fr;gap:1px;background:var(--border);border:1px solid var(--border);margin-bottom:2rem}
+.mw-card{background:var(--bg);padding:1.5rem 1.75rem}
+.mw-card-h{display:flex;justify-content:space-between;gap:1rem;flex-wrap:wrap;font-family:var(--mono);font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:var(--accent);margin-bottom:1.25rem;padding-bottom:.75rem;border-bottom:1px solid var(--border)}
+.mw-dim{color:var(--ink-3);letter-spacing:.04em;text-transform:none;font-family:var(--mono);font-size:10px}
+.mw-row{display:grid;grid-template-columns:96px 1fr;align-items:center;gap:.75rem;margin-bottom:.6rem;cursor:pointer;transition:opacity .3s}
+.mw-row-l{font-size:12px;color:var(--ink);font-weight:500;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.mw-track{position:relative;height:26px;background-image:linear-gradient(to right,var(--border) 1px,transparent 1px);background-size:calc(100% / var(--n)) 100%}
+.mw-bar{position:absolute;top:3px;bottom:3px;background:var(--accent);transform:scaleX(0);transform-origin:left;transition:transform 1s cubic-bezier(.2,.8,.2,1),filter .2s;display:flex;align-items:center;padding:0 .5rem;overflow:hidden}
+.mw-bar span{font-family:var(--mono);font-size:10px;color:var(--bg);white-space:nowrap;opacity:0;transition:opacity .4s .8s}
+.mw-bar.now{background:var(--accent-2)}
+.mw-bar.now::after{content:'';position:absolute;right:0;top:0;bottom:0;width:3px;background:var(--bg);animation:blink 1.4s infinite}
+.go .mw-bar{transform:scaleX(1)}
+.go .mw-bar span{opacity:1}
+.mw-row:hover .mw-bar{filter:brightness(1.15)}
+.mw-axis{position:relative;height:18px;margin-left:calc(96px + .75rem);font-family:var(--mono);font-size:10px;color:var(--ink-3)}
+.mw-axis span{position:absolute;transform:translateX(-50%)}
+.mw-tool{display:grid;grid-template-columns:96px 1fr 50px;align-items:center;gap:.6rem;width:100%;background:none;border:none;font:inherit;padding:.3rem 0;cursor:pointer;text-align:left}
+.mw-tool .n{font-family:var(--mono);font-size:11px;color:var(--ink-2);white-space:nowrap;overflow:hidden;text-overflow:ellipsis;transition:color .2s}
+.mw-tool .tr{height:8px;background:var(--bg-off);position:relative}
+.mw-tool .tr i{position:absolute;left:0;top:0;bottom:0;width:var(--w);background:var(--accent);transform:scaleX(0);transform-origin:left;transition:transform .9s cubic-bezier(.2,.8,.2,1),background .2s}
+.go .mw-tool .tr i{transform:scaleX(1)}
+.mw-tool .c{font-family:var(--mono);font-size:10px;color:var(--ink-3);text-align:right}
+.mw-tool:hover .n,.mw-tool.on .n{color:var(--accent)}
+.mw-tool.on .tr i{background:var(--accent-2)}
+.mw-filter{display:flex;align-items:center;gap:.75rem;flex-wrap:wrap;font-family:var(--mono);font-size:12px;color:var(--ink-2);padding:.7rem 1rem;border:1px solid var(--accent);background:var(--accent-light);margin-bottom:1rem;position:sticky;top:72px;z-index:5}
+.mw-filter[hidden]{display:none}
+.mw-filter b{color:var(--accent);font-weight:500}
+.mw-filter button{margin-left:auto;background:var(--bg-card);border:1px solid var(--border);color:var(--ink-2);font-family:var(--mono);font-size:11px;padding:3px 10px;cursor:pointer}
+.mw-filter button:hover{border-color:var(--accent);color:var(--accent)}
+.exp-item{transition:opacity .35s}
+.mw-dim-item{opacity:.28}
+.mw-row.mw-dim-item{opacity:.3}
+.exp-tag{cursor:pointer;transition:background .2s,color .2s,border-color .2s}
+.exp-tag:hover{border-color:var(--accent);color:var(--accent)}
+.exp-tag.mw-tag-hit{background:var(--accent);color:var(--bg);border-color:var(--accent)}
+.exp-item.mw-flash{animation:mwFlash 1.6s ease}
+@keyframes mwFlash{25%{background:var(--accent-light)}}
+.skill-list li{cursor:pointer}
+
+/* impact bars */
+.mw-impact{margin-top:1.25rem;padding:1rem 1.1rem;border:1px solid var(--border);background:var(--bg);max-width:460px}
+.mw-impact-h{font-family:var(--mono);font-size:11px;letter-spacing:.06em;text-transform:uppercase;color:var(--ink-3);margin-bottom:.7rem;display:flex;justify-content:space-between;align-items:baseline;gap:1rem}
+.mw-impact-h b{color:var(--accent-2);font-weight:500;font-size:14px}
+.mw-ib{display:grid;grid-template-columns:50px 1fr 32px;gap:.6rem;align-items:center;margin-bottom:.4rem;font-family:var(--mono);font-size:10px;color:var(--ink-3)}
+.mw-ib-t{height:10px;background:var(--bg-off)}
+.mw-ib-t i{display:block;height:100%;width:0;background:var(--ink-3);transition:width 1.2s cubic-bezier(.2,.8,.2,1)}
+.mw-ib-t i.after{background:var(--accent-2);transition-delay:.35s}
+.go .mw-ib-t i{width:var(--w)}
+.mw-ib em{font-style:normal;text-align:right;color:var(--ink-2)}
+
+/* certificates chart */
+.mw-cert{border:1px solid var(--border);background:var(--bg);padding:1.5rem 1.75rem;margin-bottom:2rem}
+.mw-cols{display:flex;gap:.75rem;align-items:flex-end;height:150px}
+.mw-col{flex:1;display:flex;flex-direction:column;justify-content:flex-end;height:100%;background:none;border:none;cursor:pointer;font:inherit;padding:0}
+.mw-col-bar{height:0;background:var(--accent);transition:height 1s cubic-bezier(.2,.8,.2,1),background .2s;position:relative}
+.go .mw-col-bar{height:var(--h)}
+.mw-col-bar span{position:absolute;top:-18px;left:0;right:0;text-align:center;font-family:var(--mono);font-size:11px;color:var(--ink-2)}
+.mw-col.zero .mw-col-bar{height:2px;background:var(--ink-4)}
+.mw-col-y{font-family:var(--mono);font-size:10px;color:var(--ink-3);text-align:center;margin-top:.5rem;border-top:1px solid var(--border);padding-top:.4rem}
+.mw-col:hover .mw-col-bar,.mw-col.on .mw-col-bar{background:var(--accent-2)}
+.mw-col.on .mw-col-y{color:var(--accent)}
+.cert-row{transition:opacity .3s}
+
+@media (max-width:900px){
+  .mw-viz{grid-template-columns:1fr}
+  .mw-detail{grid-template-columns:1fr;gap:.75rem}
+  .mw-filter{top:66px}
+}
+@media (max-width:600px){
+  .mw-stage{padding:.7rem .3rem}
+  .mw-stage .k{display:none}
+  .mw-stage .t{font-size:11px}
+  .mw-row{grid-template-columns:72px 1fr}
+  .mw-axis{margin-left:calc(72px + .75rem)}
+  .mw-axis span:nth-child(even){display:none}
+  .mw-card,.mw-cert{padding:1.1rem}
+  .mw-cols{gap:.4rem}
+}
+/* ===== AI + data analytics layer ===== */
+#hero::before{content:'';position:absolute;inset:0;pointer-events:none;z-index:0;opacity:.6;
+  background-image:linear-gradient(var(--border) 1px,transparent 1px),linear-gradient(90deg,var(--border) 1px,transparent 1px);background-size:44px 44px;
+  -webkit-mask-image:radial-gradient(ellipse 70% 65% at 70% 50%,#000 15%,transparent 75%);mask-image:radial-gradient(ellipse 70% 65% at 70% 50%,#000 15%,transparent 75%)}
+.mw-idx{font-family:var(--mono);color:var(--ink-3);font-weight:400}
+.mw-idx::after{content:'';display:inline-block;width:18px;height:1px;background:currentColor;vertical-align:middle;margin-left:.75rem;opacity:.6}
+.skills-grid{grid-template-columns:repeat(4,1fr)}
+@media (max-width:1150px){.skills-grid{grid-template-columns:repeat(2,1fr)}}
+@media (max-width:900px){.skills-grid{grid-template-columns:1fr}}
+.mw-explore{background:linear-gradient(160deg,var(--accent-light),var(--bg-card) 65%)}
+.mw-explore .skill-list li{cursor:default}
+.mw-explore .skill-list li::before{content:'◆';font-size:8px;color:var(--accent-2);opacity:1}
+.mw-explore-note{margin-top:1.25rem;font-size:12px;color:var(--ink-2);line-height:1.75}
+
+/* SQL console in hero — follows the light/dark theme */
+.mw-console{--c-bg:#f6f8fa;--c-head:#eef1f5;--c-line:#d0d7de;--c-text:#24292f;--c-strong:#1f2328;--c-muted:#57606a;--c-dot:#c9d1d9;
+  --c-kw:#cf222e;--c-fn:#8250df;--c-num:#0550ae;--c-ok:#1a7f37;--c-cur:#0062cc;
+  grid-column:1/-1;background:var(--c-bg);color:var(--c-text);font-family:var(--mono);font-size:12px;line-height:1.6;transition:background .3s,color .3s}
+[data-theme="dark"] .mw-console{--c-bg:#0b1220;--c-head:#0e1626;--c-line:#1f2a3c;--c-text:#c9d1d9;--c-strong:#e6edf3;--c-muted:#8b949e;--c-dot:#2d3748;
+  --c-kw:#ff7b72;--c-fn:#d2a8ff;--c-num:#79c0ff;--c-ok:#3fb950;--c-cur:#58a6ff}
+.mw-con-h{display:flex;align-items:center;gap:.75rem;padding:.6rem 1rem;background:var(--c-head);border-bottom:1px solid var(--c-line);font-size:11px;color:var(--c-muted)}
+.mw-con-h .dots{display:flex;gap:5px}
+.mw-con-h .dots i{width:8px;height:8px;border-radius:50%;background:var(--c-dot)}
+.mw-con-st{margin-left:auto;color:var(--c-ok);display:flex;align-items:center;gap:.45rem;font-size:10px;letter-spacing:.06em;text-transform:uppercase}
+.mw-con-st::before{content:'';width:6px;height:6px;border-radius:50%;background:var(--c-ok);animation:blink 1.4s infinite}
+.mw-con-q{margin:0;padding:.9rem 1rem .5rem;white-space:pre-wrap;min-height:7em;font:inherit;color:var(--c-text)}
+.mw-con-q .kw{color:var(--c-kw)}.mw-con-q .fn{color:var(--c-fn)}.mw-con-q .nm{color:var(--c-num)}
+.mw-con-q .cur{display:inline-block;width:7px;height:1.1em;background:var(--c-cur);vertical-align:text-bottom;animation:blink 1s steps(1) infinite}
+.mw-con-r{padding:0 1rem;min-height:10.5em}
+.mw-con-r table{width:100%;border-collapse:collapse;table-layout:fixed}
+.mw-con-r th{font-weight:400;color:var(--c-muted);text-align:left;font-size:10px;letter-spacing:.08em;text-transform:uppercase;padding:.3rem .5rem .3rem 0;border-bottom:1px solid var(--c-line)}
+.mw-con-r td{padding:.22rem .5rem .22rem 0;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;color:var(--c-strong);font-size:11.5px}
+.mw-con-r tr.row{opacity:0;transform:translateX(-6px);transition:opacity .35s,transform .35s}
+.mw-con-r tr.row.in{opacity:1;transform:none}
+.mw-con-r .num{color:var(--c-num)}
+.mw-con-r .bar{display:inline-block;height:6px;background:var(--c-ok);margin-left:.6rem;vertical-align:middle}
+.mw-con-f{display:flex;justify-content:space-between;gap:1rem;padding:.55rem 1rem;border-top:1px solid var(--c-line);color:var(--c-muted);font-size:10.5px;margin-top:.5rem}
+
+/* data-lineage rail */
+.mw-rail{position:fixed;left:26px;top:50%;transform:translateY(-50%);z-index:60;display:none}
+@media (min-width:1280px){.mw-rail{display:block}}
+.mw-rail-line,.mw-rail-fill{position:absolute;left:4px;top:4px;width:1px}
+.mw-rail-line{bottom:4px;background:var(--border)}
+.mw-rail-fill{height:0;background:linear-gradient(var(--accent),var(--accent-2));transition:height .4s ease}
+.mw-rail a{display:block;position:relative;width:9px;height:9px;margin:0 0 22px;border-radius:50%;border:1px solid var(--ink-4);background:var(--bg);transition:background .25s,border-color .25s,box-shadow .25s}
+.mw-rail a:last-child{margin-bottom:0}
+.mw-rail a.done{border-color:var(--accent);background:var(--accent)}
+.mw-rail a.on{border-color:var(--accent);background:var(--accent);box-shadow:0 0 0 4px color-mix(in srgb,var(--accent) 22%,transparent)}
+.mw-rail a span{position:absolute;left:18px;top:50%;transform:translate(-4px,-50%);opacity:0;white-space:nowrap;font-family:var(--mono);font-size:10px;letter-spacing:.08em;text-transform:uppercase;color:var(--accent);background:var(--bg-card);border:1px solid var(--border);padding:2px 7px;pointer-events:none;transition:opacity .2s,transform .2s}
+.mw-rail a:hover span,.mw-rail a:focus-visible span{opacity:1;transform:translate(0,-50%)}
+@media print{.mw-rail,.mw-console,#hero::before{display:none!important}.skills-grid{grid-template-columns:repeat(2,1fr)!important}}
+
+/* ===== visual work history ===== */
+.mw-tl{position:relative;padding-left:34px}
+.mw-tl::before{content:'';position:absolute;left:6px;top:0;bottom:0;width:1px;background:linear-gradient(var(--accent),var(--accent-2) 40%,var(--border))}
+.mw-tl .exp-item{position:relative;border-top:none!important;border-bottom:none!important;padding:0;margin-bottom:1.25rem;background:var(--bg);border:1px solid var(--border)!important;grid-template-columns:220px 1fr;gap:0;transition:opacity .35s,border-color .25s,box-shadow .25s,transform .25s}
+.mw-tl .exp-item:hover{border-color:color-mix(in srgb,var(--accent) 45%,var(--border))!important;transform:translateY(-2px);box-shadow:0 10px 30px -18px color-mix(in srgb,var(--accent) 60%,transparent)}
+.mw-tl .exp-item::before{content:'';position:absolute;left:-34px;top:1.9rem;width:13px;height:13px;border-radius:50%;background:var(--bg-card);border:2px solid var(--accent);box-sizing:border-box}
+.mw-tl .exp-item.mw-now::before{background:var(--accent-2);border-color:var(--accent-2);box-shadow:0 0 0 0 color-mix(in srgb,var(--accent-2) 50%,transparent);animation:mwPulse 2s infinite}
+@keyframes mwPulse{70%{box-shadow:0 0 0 9px transparent}100%{box-shadow:0 0 0 0 transparent}}
+.mw-tl .exp-item > div:first-child{padding:1.6rem 1.5rem;border-right:1px solid var(--border);background:var(--bg-card)}
+.mw-tl .exp-item > div:last-child{padding:1.6rem 1.75rem}
+.mw-tl .exp-year{display:inline-block;padding:2px 8px;border:1px solid var(--border);background:var(--bg);margin-bottom:.9rem}
+.mw-now .exp-year{border-color:var(--accent-2);color:var(--accent-2)}
+.mw-dur{display:block;font-family:var(--mono);font-size:10px;color:var(--ink-2);margin-top:.9rem;letter-spacing:.06em}
+.mw-durbar{height:3px;background:var(--bg-off);margin-top:.4rem;position:relative;overflow:hidden}
+.mw-durbar i{position:absolute;left:0;top:0;bottom:0;width:0;background:var(--accent);transition:width 1.1s cubic-bezier(.2,.8,.2,1)}
+.mw-now .mw-durbar i{background:var(--accent-2)}
+.go .mw-durbar i,.mw-durbar.go i{width:var(--w)}
+.mw-stats{display:grid;grid-template-columns:repeat(auto-fit,minmax(140px,1fr));gap:1px;background:var(--border);border:1px solid var(--border);margin-bottom:1.1rem}
+@media (max-width:600px){.mw-stats{grid-template-columns:repeat(2,1fr)}.mw-stat b{font-size:1.25rem}}
+.mw-stat{background:var(--bg-card);padding:.85rem 1rem}
+.mw-stat b{display:block;font-family:var(--mono);font-weight:500;font-size:1.45rem;line-height:1.1;color:var(--ink);letter-spacing:-.02em}
+.mw-stat b em{font-style:normal;color:var(--accent)}
+.mw-stat > span{display:block;font-family:var(--mono);font-size:10px;letter-spacing:.06em;text-transform:uppercase;color:var(--ink-2);margin-top:.35rem;line-height:1.45}
+.mw-focus{display:flex;flex-wrap:wrap;gap:.5rem;margin-bottom:1rem}
+.mw-focus span{display:inline-flex;align-items:center;gap:.4rem;font-size:12px;color:var(--ink-2);padding:3px 10px 3px 8px;background:var(--accent-light);border-radius:999px}
+.mw-focus span::before{content:'';width:6px;height:6px;border-radius:50%;background:var(--accent)}
+.mw-tl .exp-points{overflow:hidden;max-height:0;opacity:0;transition:max-height .45s ease,opacity .3s ease,margin .3s}
+.mw-tl .exp-item.mw-open .exp-points{max-height:900px;opacity:1;margin-top:.9rem}
+.mw-more{margin-top:.9rem;background:none;border:none;padding:0;cursor:pointer;font-family:var(--mono);font-size:11px;color:var(--accent);letter-spacing:.04em;display:inline-flex;align-items:center;gap:.4rem}
+.mw-more::after{content:'';width:6px;height:6px;border-right:1.5px solid currentColor;border-bottom:1.5px solid currentColor;transform:rotate(45deg) translateY(-2px);transition:transform .25s}
+.mw-open .mw-more::after{transform:rotate(-135deg) translateY(-1px)}
+.mw-expand-all{display:block;margin:0 0 1rem auto;background:none;border:1px solid var(--border);padding:4px 12px;font-family:var(--mono);font-size:11px;color:var(--ink-2);cursor:pointer}
+.mw-expand-all:hover{border-color:var(--accent);color:var(--accent)}
+.mw-tl .mw-impact{max-width:none}
+@media (max-width:900px){
+  .mw-tl{padding-left:24px}
+  .mw-tl::before{left:4px}
+  .mw-tl .exp-item{grid-template-columns:1fr}
+  .mw-tl .exp-item::before{left:-26px}
+  .mw-tl .exp-item > div:first-child{border-right:none;border-bottom:1px solid var(--border);padding:1.2rem}
+  .mw-tl .exp-item > div:last-child{padding:1.2rem}
+}
+@media print{.mw-tl .exp-points{max-height:none!important;opacity:1!important}.mw-more,.mw-expand-all{display:none!important}.mw-durbar i{width:var(--w)!important}}
+
+@media (prefers-reduced-motion: reduce){
+  .mw-con-st::before,.mw-con-q .cur{animation:none}
+  .mw-con-r tr.row,.mw-rail-fill{transition:none}
+  .mw-tl .exp-item.mw-now::before{animation:none}
+  .mw-durbar i,.mw-tl .exp-points{transition:none}
+  .mw-edge,.mw-n.on .mw-ring,.mw-bar.now::after,.mw-caret{animation:none}
+  .mw-bar,.mw-tool .tr i,.mw-col-bar,.mw-ib-t i,.metric-bar-fill{transition:none}
+}
+@media print{
+  .mw-progress,.mw-tip,.mw-filter,#mw-pipeline svg{display:none!important}
+  .mw-bar,.mw-tool .tr i{transform:none!important}
+  .mw-bar span{opacity:1!important}
+  .mw-col-bar{height:var(--h)!important}
+  .mw-ib-t i{width:var(--w)!important}
+  .mw-dim-item{opacity:1!important}
+}
+</style>
+
+<script id="mw-enhance-js">
+(function(){
+  var reduce = window.matchMedia && matchMedia('(prefers-reduced-motion: reduce)').matches;
+  var $ = function(s,r){ return (r||document).querySelector(s); };
+  var $$ = function(s,r){ return Array.prototype.slice.call((r||document).querySelectorAll(s)); };
+  function el(tag, cls, html){ var e=document.createElement(tag); if(cls) e.className=cls; if(html!=null) e.innerHTML=html; return e; }
+  function onView(node, fn, th){
+    if(!('IntersectionObserver' in window)){ fn(); return; }
+    var o=new IntersectionObserver(function(es){ es.forEach(function(e){ if(e.isIntersecting){ fn(); o.disconnect(); } }); },{threshold:th==null?0.25:th});
+    o.observe(node);
+  }
+  function reveal(node){ node.classList.add('reveal'); onView(node,function(){ node.classList.add('visible'); },0.08); }
+  function esc(s){ return String(s).replace(/[&<>"]/g,function(c){return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c];}); }
+  function fmtYrs(n){ var r=Math.round(n*10)/10; return (r%1===0? r.toFixed(0): r.toFixed(1)) + (r===1?' yr':' yrs'); }
+
+  /* ---------- tooltip ---------- */
+  var tip=el('div','mw-tip'); tip.setAttribute('role','tooltip'); document.body.appendChild(tip);
+  function showTip(html,x,y){
+    tip.innerHTML=html; tip.style.opacity=1;
+    var r=tip.getBoundingClientRect(), L=x+14, T=y+14;
+    if(L+r.width>innerWidth-8) L=x-r.width-14;
+    if(T+r.height>innerHeight-8) T=y-r.height-14;
+    tip.style.transform='translate('+Math.max(8,L)+'px,'+Math.max(8,T)+'px)';
+  }
+  function hideTip(){ tip.style.opacity=0; }
+  function bindTip(node, htmlFn){
+    node.addEventListener('pointermove',function(e){ if(e.pointerType!=='touch') showTip(htmlFn(),e.clientX,e.clientY); });
+    node.addEventListener('pointerleave',hideTip);
+  }
+
+  /* ---------- scroll progress + active nav ---------- */
+  var prog=el('div','mw-progress'); document.body.appendChild(prog);
+  function onScroll(){ var h=document.documentElement, max=(h.scrollHeight-h.clientHeight)||1; prog.style.transform='scaleX('+Math.min(1,h.scrollTop/max)+')'; }
+  addEventListener('scroll',onScroll,{passive:true}); onScroll();
+  var navLinks=$$('.nav-links a, .nav-mobile a');
+  if('IntersectionObserver' in window){
+    var seen={};
+    var so=new IntersectionObserver(function(es){ es.forEach(function(e){ if(e.isIntersecting){ var id='#'+e.target.id; navLinks.forEach(function(a){ a.classList.toggle('active',a.getAttribute('href')===id); }); } }); },{rootMargin:'-45% 0px -50% 0px'});
+    navLinks.forEach(function(a){ var h=a.getAttribute('href'); var s=h&&h.charAt(0)==='#'&&$(h); if(s&&!seen[h]){ seen[h]=1; so.observe(s); } });
+  }
+
+  /* ---------- typing role line ---------- */
+  var sub=$('.h1-sub');
+  if(sub && !reduce){
+    var phrases=[sub.textContent.trim(),'dbt + Snowflake data modeler','Dashboards & KPI frameworks','Raw events → trusted decisions'];
+    sub.setAttribute('aria-label',phrases[0]);
+    var txt=el('span'); txt.setAttribute('aria-hidden','true'); txt.textContent=phrases[0];
+    var caret=el('span','mw-caret'); caret.setAttribute('aria-hidden','true');
+    sub.textContent=''; sub.appendChild(txt); sub.appendChild(caret);
+    var pi=0, ci=phrases[0].length, deleting=true;
+    var tick=function(){
+      var p=phrases[pi];
+      if(deleting){ ci--; txt.textContent=p.slice(0,ci); if(ci<=0){ deleting=false; pi=(pi+1)%phrases.length; } setTimeout(tick,26); }
+      else { ci++; p=phrases[pi]; txt.textContent=p.slice(0,ci); if(ci>=p.length){ deleting=true; setTimeout(tick,2400); } else setTimeout(tick,55); }
+    };
+    setTimeout(tick,2600);
+  }
+
+  /* ---------- hero metrics count-up ---------- */
+  $$('.hero-metric').forEach(function(m,k){
+    var v=$('.metric-val',m); if(!v) return;
+    var tn=null; for(var i=0;i<v.childNodes.length;i++){ var n=v.childNodes[i]; if(n.nodeType===3 && n.nodeValue.trim()){ tn=n; break; } }
+    var fill=$('.metric-bar-fill',m), w=fill?fill.style.width:null, target=tn?parseFloat(tn.nodeValue):0;
+    if(reduce || !tn) return;
+    tn.nodeValue='0'; if(fill) fill.style.width='0';
+    onView(m,function(){
+      var t0=performance.now()+k*140, d=1400;
+      requestAnimationFrame(function f(t){ var p=Math.min(1,Math.max(0,(t-t0)/d)), e=1-Math.pow(1-p,3); tn.nodeValue=String(Math.round(target*e)); if(p<1) requestAnimationFrame(f); });
+      if(fill) setTimeout(function(){ fill.style.width=w; },80+k*140);
+    },0.3);
+  });
+
+  /* ---------- cursor spotlight ---------- */
+  $$('.hero-metric, .skill-block, .edu-item, .project-body').forEach(function(c){
+    c.classList.add('mw-spot');
+    c.addEventListener('pointermove',function(e){ var r=c.getBoundingClientRect(); c.style.setProperty('--mx',(e.clientX-r.left)+'px'); c.style.setProperty('--my',(e.clientY-r.top)+'px'); });
+  });
+
+  /* ---------- workflow / pipeline section ---------- */
+  var STAGES=[
+    {k:'01 · ingest',t:'Sources',d:'Product databases and event streams from app, growth and marketing tools land as raw tables.',tools:['PostgreSQL','MySQL','CleverTap','Appsflyer','MoEngage','Google Analytics']},
+    {k:'02 · orchestrate',t:'Composer',d:'Scheduled pipelines built for reliability, with error handling, monitoring and documentation baked in.',tools:['Composer','Python','GCP']},
+    {k:'03 · store',t:'Warehouse',d:'One central warehouse, so every team queries the same source of truth.',tools:['Snowflake','BigQuery']},
+    {k:'04 · model & test',t:'dbt',d:'Clean, documented models that analysts can query without deep technical knowledge, guarded by dbt tests and SQL assertions before anything reaches a stakeholder.',tools:['dbt','Dataform','SQL']},
+    {k:'05 · serve',t:'BI & metrics',d:'Dashboards, KPI frameworks and daily alerts for product, finance and marketing teams.',tools:['Looker','Tableau','Superset','Domo','Metabase']}
+  ];
+  var about=$('#about');
+  if(about){
+    var xs=[100,300,500,700,900], svg='<svg viewBox="0 0 1000 150" role="img" aria-label="Data pipeline: sources, Composer, warehouse, dbt, BI">';
+    for(var e=0;e<4;e++){
+      var a=xs[e]+32, b=xs[e+1]-32, path='M'+a+',75 L'+b+',75';
+      svg+='<path class="mw-edge" d="'+path+'"/>';
+      for(var p=0;p<2;p++){
+        var beg=(e*0.45+p*0.9).toFixed(2)+'s';
+        svg+='<circle r="4" class="mw-packet" opacity="0"><animateMotion dur="1.8s" begin="'+beg+'" repeatCount="indefinite" path="'+path+'"/><animate attributeName="opacity" values="0;1;1;0" dur="1.8s" begin="'+beg+'" repeatCount="indefinite"/></circle>';
+      }
+    }
+    xs.forEach(function(x,i){
+      svg+='<g class="mw-n" data-i="'+i+'"><circle class="mw-ring" cx="'+x+'" cy="75" r="30"/><circle class="mw-node" cx="'+x+'" cy="75" r="30"/><text class="mw-num" x="'+x+'" y="75">0'+(i+1)+'</text></g>';
+    });
+    svg+='</svg>';
+    var stagesHtml=STAGES.map(function(s,i){ return '<button type="button" class="mw-stage" data-i="'+i+'" aria-pressed="false"><span class="k">'+esc(s.k)+'</span><span class="t">'+esc(s.t)+'</span></button>'; }).join('');
+    var sec=el('section',null,
+      '<div class="sec-eyebrow">Workflow</div><h2>From raw events to decisions</h2>'+
+      '<p class="sec-sub">How data moves through the stacks I build. Pick a stage to see what happens there.</p>'+
+      '<div class="mw-pipe">'+svg+'<div class="mw-stages">'+stagesHtml+'</div><div class="mw-detail" aria-live="polite"></div></div>');
+    sec.id='mw-pipeline';
+    about.parentNode.insertBefore(sec, about.nextSibling);
+    reveal($('.mw-pipe',sec));
+    var svgEl=$('svg',sec), detail=$('.mw-detail',sec), cur=-1, timer=null;
+    if(reduce && svgEl.pauseAnimations) svgEl.pauseAnimations();
+    var setStage=function(i){
+      cur=i; var s=STAGES[i];
+      $$('.mw-n',sec).forEach(function(g){ g.classList.toggle('on',+g.getAttribute('data-i')===i); });
+      $$('.mw-stage',sec).forEach(function(bt){ bt.setAttribute('aria-pressed',+bt.getAttribute('data-i')===i?'true':'false'); });
+      detail.innerHTML='<div class="mw-in"><div class="k">'+esc(s.k)+'</div><h3>'+esc(s.t)+'</h3></div><div class="mw-in"><p>'+esc(s.d)+'</p><div class="mw-chips">'+s.tools.map(function(t){return '<span>'+esc(t)+'</span>';}).join('')+'</div></div>';
+    };
+    var stopAuto=function(){ if(timer){ clearInterval(timer); timer=null; } };
+    $$('.mw-stage, .mw-n',sec).forEach(function(n){ n.addEventListener('click',function(){ stopAuto(); setStage(+n.getAttribute('data-i')); }); });
+    setStage(0);
+    if(!reduce) onView(sec,function(){ timer=setInterval(function(){ setStage((cur+1)%STAGES.length); },3800); },0.3);
+  }
+
+  /* ---------- experience: timeline + tools charts + filtering ---------- */
+  var expSec=$('#experience'), items=$$('#experience .exp-item');
+  var applyFilter=function(){};
+  if(expSec && items.length){
+    var now=new Date(), nowY=now.getFullYear()+now.getMonth()/12;
+    var jobs=items.map(function(it){
+      var yr=($('.exp-year',it)||{}).textContent||'', m=yr.match(/(\d{4})\s*[—–-]\s*(\d{4}|present)/i);
+      var s=m?+m[1]:nowY, isNow=m&&/present/i.test(m[2]), en=m?(isNow?nowY:+m[2]):nowY;
+      if(en<=s) en=s+0.5;
+      return {it:it, co:(($('.exp-company',it)||{}).textContent||'').trim(), role:(($('.exp-role',it)||{}).textContent||'').trim(), yr:yr.trim(), s:s, e:en, now:isNow,
+              tags:$$('.exp-tag',it).map(function(t){return t.textContent.trim();})};
+    }).sort(function(a,b){ return a.s-b.s; });
+    var y0=Math.floor(Math.min.apply(null,jobs.map(function(j){return j.s;}))), y1=Math.ceil(Math.max.apply(null,jobs.map(function(j){return j.e;})));
+    var span=(y1-y0)||1, pct=function(y){ return ((y-y0)/span*100); };
+
+    var rows=jobs.map(function(j,i){
+      return '<div class="mw-row" data-co="'+esc(j.co)+'"><div class="mw-row-l">'+esc(j.co)+'</div><div class="mw-track" style="--n:'+span+'">'+
+        '<div class="mw-bar'+(j.now?' now':'')+'" style="left:'+pct(j.s).toFixed(2)+'%;width:'+(pct(j.e)-pct(j.s)).toFixed(2)+'%;transition-delay:'+(i*0.15)+'s"><span>'+fmtYrs(j.e-j.s)+(j.now?' · now':'')+'</span></div></div></div>';
+    }).join('');
+    var axis=''; for(var y=y0;y<=y1;y++) axis+='<span style="left:'+pct(y)+'%">'+("'"+String(y).slice(2))+'</span>';
+
+    var counts={}, names={};
+    jobs.forEach(function(j){ j.tags.forEach(function(t){ var k=t.toLowerCase(); counts[k]=(counts[k]||0)+1; if(!names[k]) names[k]=t; }); });
+    var toolKeys=Object.keys(counts).sort(function(a,b){ return counts[b]-counts[a] || names[a].localeCompare(names[b]); }).slice(0,9);
+    var maxC=counts[toolKeys[0]]||1;
+    var tools=toolKeys.map(function(k,i){
+      return '<button type="button" class="mw-tool" data-t="'+esc(names[k])+'"><span class="n">'+esc(names[k])+'</span><span class="tr"><i style="--w:'+(counts[k]/maxC*100)+'%;transition-delay:'+(i*0.07)+'s"></i></span><span class="c">'+counts[k]+(counts[k]===1?' role':' roles')+'</span></button>';
+    }).join('');
+
+    var viz=el('div','mw-viz',
+      '<div class="mw-card"><div class="mw-card-h"><span>// career timeline</span><span class="mw-dim">hover for detail · click to jump</span></div>'+rows+'<div class="mw-axis">'+axis+'</div></div>'+
+      '<div class="mw-card"><div class="mw-card-h"><span>// tools across roles</span><span class="mw-dim">click to filter</span></div>'+tools+'</div>');
+    var filterBar=el('div','mw-filter','<span class="msg"></span><button type="button">clear ×</button>'); filterBar.hidden=true;
+    var anchor=$('.sec-sub',expSec) || $('h2',expSec);
+    anchor.parentNode.insertBefore(viz, anchor.nextSibling);
+    viz.parentNode.insertBefore(filterBar, viz.nextSibling);
+    reveal(viz);
+    onView(viz,function(){ viz.classList.add('go'); },0.3);
+
+    $$('.mw-row',viz).forEach(function(r){
+      var j=jobs.filter(function(x){ return x.co===r.getAttribute('data-co'); })[0];
+      bindTip(r,function(){ return '<b>'+esc(j.co)+'</b><br>'+esc(j.role)+'<br>'+esc(j.yr)+' · '+fmtYrs(j.e-j.s); });
+      r.addEventListener('click',function(){
+        hideTip(); j.it.scrollIntoView({behavior:reduce?'auto':'smooth',block:'center'});
+        j.it.classList.remove('mw-flash'); void j.it.offsetWidth; j.it.classList.add('mw-flash');
+      });
+    });
+
+    var ALIAS={
+      'google cloud platform':['gcp','google cloud'], 'etl pipeline design':['pipeline','etl'], 'data modeling':['data model'],
+      'data warehousing':['snowflake','bigquery','warehouse'], 'dashboard design':['dashboard'], 'kpi frameworks':['kpi','metrics'],
+      'google data studio':['data studio'], 'git version control':['git '], 'excel (mos expert)':['excel'], 'google tag manager':['tag manager'],
+      'python django':['python','django']
+    };
+    var aliases=function(name){ var k=name.toLowerCase().replace(/\s+/g,' ').trim(); if(ALIAS[k]) return ALIAS[k];
+      return k.replace(/\(.*?\)/g,'').split(/&|·|,|\//).map(function(s){return s.trim();}).filter(Boolean); };
+    var active=null;
+    var clearFilter=function(){
+      active=null; filterBar.hidden=true;
+      $$('.mw-dim-item',expSec).forEach(function(n){ n.classList.remove('mw-dim-item'); });
+      $$('.mw-tag-hit',expSec).forEach(function(n){ n.classList.remove('mw-tag-hit'); });
+      $$('.mw-tool.on',expSec).forEach(function(n){ n.classList.remove('on'); });
+    };
+    applyFilter=function(name){
+      name=name.trim();
+      if(active && active.toLowerCase()===name.toLowerCase()){ clearFilter(); return; }
+      clearFilter(); active=name;
+      var al=aliases(name), hits=0;
+      var match=function(s){ s=s.toLowerCase()+' '; return al.some(function(a){ return s.indexOf(a)!==-1; }); };
+      jobs.forEach(function(j){
+        var hit=match(j.it.textContent);
+        if(hit) hits++;
+        j.hit=hit;
+        $$('.exp-tag',j.it).forEach(function(t){ if(hit && match(t.textContent)) t.classList.add('mw-tag-hit'); });
+      });
+      if(hits){
+        jobs.forEach(function(j){
+          if(!j.hit){ j.it.classList.add('mw-dim-item'); var r=$('.mw-row[data-co="'+j.co.replace(/"/g,'\\"')+'"]',viz); if(r) r.classList.add('mw-dim-item'); }
+        });
+      }
+      $$('.mw-tool',viz).forEach(function(t){ t.classList.toggle('on',t.getAttribute('data-t').toLowerCase()===name.toLowerCase()); });
+      $('.msg',filterBar).innerHTML = hits
+        ? 'Showing <b>'+hits+'</b> of '+jobs.length+' roles that use <b>'+esc(name)+'</b>'
+        : '<b>'+esc(name)+'</b> isn’t tied to a specific role below';
+      filterBar.hidden=false;
+    };
+    $('button',filterBar).addEventListener('click',clearFilter);
+    $$('.mw-tool',viz).forEach(function(t){ t.addEventListener('click',function(){ applyFilter(t.getAttribute('data-t')); }); });
+    $$('.exp-tag',expSec).forEach(function(t){ t.title='Filter roles by '+t.textContent.trim(); t.addEventListener('click',function(){ applyFilter(t.textContent); }); });
+    $$('#skills .skill-block:not(.mw-explore) .skill-list li').forEach(function(li){
+      li.title='Show roles that used this';
+      li.addEventListener('click',function(){ applyFilter(li.textContent); expSec.scrollIntoView({behavior:reduce?'auto':'smooth'}); });
+    });
+
+    /* impact bars on the Ula role (CleverTap −30%) */
+    jobs.forEach(function(j){
+      if(!/clevertap/i.test(j.it.textContent) || !/30%/.test(j.it.textContent)) return;
+      var col=j.it.children[1]; if(!col) return;
+      var imp=el('div','mw-impact',
+        '<div class="mw-impact-h"><span>CleverTap event consumption</span><b>−30%</b></div>'+
+        '<div class="mw-ib"><span>before</span><div class="mw-ib-t"><i style="--w:100%"></i></div><em>100</em></div>'+
+        '<div class="mw-ib"><span>after</span><div class="mw-ib-t"><i class="after" style="--w:70%"></i></div><em>70</em></div>'+
+        '<div class="mw-dim">indexed to pre-optimization volume</div>');
+      col.appendChild(imp);
+      onView(imp,function(){ imp.classList.add('go'); },0.5);
+    });
+  }
+
+  /* ---------- certificates per year ---------- */
+  var certList=$('#certifications .certs-list');
+  if(certList){
+    var certRows=$$('.cert-row',certList), byY={};
+    certRows.forEach(function(r){ var m=(($('.cert-date',r)||{}).textContent||'').match(/(\d{4})/); if(!m) return; r.setAttribute('data-y',m[1]); (byY[m[1]]=byY[m[1]]||[]).push(($('.cert-name',r)||{}).textContent||''); });
+    var ys=Object.keys(byY).map(Number);
+    if(ys.length){
+      var minY=Math.min.apply(null,ys), maxY=Math.max.apply(null,ys), maxN=0;
+      for(var yy=minY;yy<=maxY;yy++) maxN=Math.max(maxN,(byY[yy]||[]).length);
+      var cols='';
+      for(var yy2=minY;yy2<=maxY;yy2++){
+        var n=(byY[yy2]||[]).length;
+        cols+='<button type="button" class="mw-col'+(n?'':' zero')+'" data-y="'+yy2+'"'+(n?'':' disabled')+'><div class="mw-col-bar" style="--h:'+(n/maxN*82)+'%;transition-delay:'+((yy2-minY)*0.08)+'s">'+(n?'<span>'+n+'</span>':'')+'</div><div class="mw-col-y">'+yy2+'</div></button>';
+      }
+      var cert=el('div','mw-cert','<div class="mw-card-h"><span>// certificates per year</span><span class="mw-dim">'+certRows.length+' total · click a year to filter</span></div><div class="mw-cols">'+cols+'</div>');
+      certList.parentNode.insertBefore(cert,certList);
+      reveal(cert);
+      onView(cert,function(){ cert.classList.add('go'); },0.3);
+      var activeY=null;
+      $$('.mw-col',cert).forEach(function(c){
+        var y=c.getAttribute('data-y');
+        if(byY[y]) bindTip(c,function(){ return '<b>'+y+'</b> · '+byY[y].length+' cert'+(byY[y].length>1?'s':'')+'<br>'+byY[y].map(esc).join('<br>'); });
+        c.addEventListener('click',function(){
+          activeY = activeY===y ? null : y;
+          $$('.mw-col',cert).forEach(function(x){ x.classList.toggle('on',x.getAttribute('data-y')===activeY); });
+          certRows.forEach(function(r){ r.classList.toggle('mw-dim-item',!!activeY && r.getAttribute('data-y')!==activeY); });
+        });
+      });
+    }
+  }
+
+  /* ---------- AI + data layer: numbered sections ---------- */
+  $$('section').filter(function(s){ return $('.sec-eyebrow',s); }).forEach(function(s,i){
+    var e=$('.sec-eyebrow',s); e.insertBefore(el('span','mw-idx',(i<9?'0':'')+(i+1)),e.firstChild);
+  });
+
+  /* ---------- data-lineage rail ---------- */
+  var RL={hero:'start',about:'about','mw-pipeline':'workflow',skills:'stack',experience:'experience',projects:'projects',education:'education',certifications:'certs',contact:'contact'};
+  var rSecs=$$('section[id]').filter(function(s){ return RL[s.id]; });
+  if(rSecs.length>2){
+    var rail=el('div','mw-rail'); rail.setAttribute('role','navigation'); rail.setAttribute('aria-label','Page sections');
+    rail.innerHTML='<div class="mw-rail-line"></div><div class="mw-rail-fill"></div>'+rSecs.map(function(s){ return '<a href="#'+s.id+'" aria-label="'+RL[s.id]+'"><span>'+RL[s.id]+'</span></a>'; }).join('');
+    document.body.appendChild(rail);
+    var rDots=$$('a',rail), rFill=$('.mw-rail-fill',rail);
+    var railUpdate=function(){
+      var cur=0, mid=innerHeight*0.4;
+      rSecs.forEach(function(s,i){ if(s.getBoundingClientRect().top<=mid) cur=i; });
+      rDots.forEach(function(d,i){ d.classList.toggle('on',i===cur); d.classList.toggle('done',i<cur); });
+      rFill.style.height=(cur*31)+'px';
+    };
+    addEventListener('scroll',railUpdate,{passive:true}); addEventListener('resize',railUpdate); railUpdate();
+  }
+
+  /* ---------- live SQL console over this page's own data ---------- */
+  var heroR=$('.hero-right');
+  var cItems=$$('#experience .exp-item');
+  if(heroR && cItems.length){
+    var cJobs=cItems.map(function(it){
+      var yr=(($('.exp-year',it)||{}).textContent||'').trim(), m=yr.match(/(\d{4})\s*[—–-]\s*(\d{4}|present)/i);
+      return {co:(($('.exp-company',it)||{}).textContent||'').trim(), role:(($('.exp-role',it)||{}).textContent||'').trim(),
+              s:m?+m[1]:0, yrs:m?(m[1]+'–'+(/present/i.test(m[2])?'now':m[2])):yr};
+    }).sort(function(a,b){ return b.s-a.s; }).slice(0,5);
+    var tc={}, tnm={};
+    $$('#experience .exp-tag').forEach(function(t){ var v=t.textContent.trim(), k=v.toLowerCase(); tc[k]=(tc[k]||0)+1; if(!tnm[k]) tnm[k]=v; });
+    var topT=Object.keys(tc).sort(function(a,b){ return tc[b]-tc[a] || tnm[a].localeCompare(tnm[b]); }).slice(0,5), maxT=tc[topT[0]]||1;
+    var QUERIES=[
+      {file:'career.sql', sql:'SELECT company, role, years\nFROM career\nORDER BY start_year DESC;', cols:['company','role','years'], w:['26%','50%','24%'],
+       rows:cJobs.map(function(j){ return [esc(j.co),esc(j.role),'<span class="num">'+esc(j.yrs)+'</span>']; })},
+      {file:'stack.sql', sql:'SELECT tool, COUNT(*) AS roles\nFROM experience_tags\nGROUP BY tool\nORDER BY roles DESC\nLIMIT 5;', cols:['tool','roles'], w:['42%','58%'],
+       rows:topT.map(function(k){ return [esc(tnm[k]),'<span class="num">'+tc[k]+'</span><span class="bar" style="width:'+(tc[k]/maxT*70)+'%"></span>']; })}
+    ];
+    var hl=function(s){ return esc(s).replace(/\b(COUNT)\b/g,'<span class="fn">$1</span>').replace(/\b(SELECT|FROM|ORDER|BY|GROUP|DESC|AS|LIMIT)\b/g,'<span class="kw">$1</span>').replace(/\b(\d+)\b/g,'<span class="nm">$1</span>'); };
+    var con=el('div','mw-console',
+      '<div class="mw-con-h"><span class="dots"><i></i><i></i><i></i></span><span class="mw-con-file">career.sql</span><span class="mw-con-st">on-page data</span></div>'+
+      '<pre class="mw-con-q" aria-hidden="true"></pre><div class="mw-con-r"></div>'+
+      '<div class="mw-con-f"><span class="st">ready</span><span>source: this portfolio</span></div>');
+    con.setAttribute('aria-label','Example SQL queries over this portfolio’s career data');
+    heroR.appendChild(con);
+    var qEl=$('.mw-con-q',con), rEl=$('.mw-con-r',con), stEl=$('.mw-con-f .st',con), fileEl=$('.mw-con-file',con), qi=0;
+    var renderRows=function(q,animate){
+      rEl.innerHTML='<table><colgroup>'+q.w.map(function(w){ return '<col style="width:'+w+'">'; }).join('')+'</colgroup><thead><tr>'+
+        q.cols.map(function(c){ return '<th>'+c+'</th>'; }).join('')+'</tr></thead><tbody>'+
+        q.rows.map(function(r){ return '<tr class="row">'+r.map(function(c){ return '<td>'+c+'</td>'; }).join('')+'</tr>'; }).join('')+'</tbody></table>';
+      $$('tr.row',rEl).forEach(function(tr,i){ if(animate) setTimeout(function(){ tr.classList.add('in'); },120+i*110); else tr.classList.add('in'); });
+      stEl.textContent=q.rows.length+' rows returned';
+    };
+    var runQuery=function(){
+      var q=QUERIES[qi], n=0; fileEl.textContent=q.file; rEl.innerHTML=''; stEl.textContent='running…';
+      (function type(){
+        n++; qEl.innerHTML=hl(q.sql.slice(0,n))+'<span class="cur"></span>';
+        if(n<q.sql.length) setTimeout(type, q.sql.charAt(n-1)==='\n'?180:30);
+        else setTimeout(function(){ qEl.innerHTML=hl(q.sql); renderRows(q,true); qi=(qi+1)%QUERIES.length; setTimeout(runQuery,7000); },450);
+      })();
+    };
+    if(reduce){ qEl.innerHTML=hl(QUERIES[0].sql); renderRows(QUERIES[0],false); }
+    else onView(con,runQuery,0.3);
+  }
+
+  /* ---------- visual work history ---------- */
+  var VIS={
+    'cloudmile':{stats:[['Snowflake','+ dbt data models'],['3','reliability layers: dbt tests · SQL assertions · monitoring'],['GCP','partner · enterprise BI clients']],
+                 focus:['Data modeling','Testing & quality','Pipeline orchestration','Enterprise BI']},
+    'nanovest':{stats:[['5','M+|users on the platform'],['4','asset classes: crypto · wallet · stocks · gold'],['3','partner teams: product · finance · marketing']],
+                focus:['Product analytics','Revenue & trading metrics','Campaign performance','Metric standards']},
+    'ula':{stats:[['30','%|cut in CleverTap consumption'],['3','apps on company-wide metrics'],['1','weekly tech business review set up']],
+           focus:['Company-wide metrics','Cost optimization','Business reviews']},
+    'dekoruma':{stats:[['4','daily alerts: GMV · SLA · users · ad cost'],['3','report cadences: daily · weekly · monthly'],['3','teams supported in the Property unit']],
+                focus:['KPI design','Recurring reporting','Alerting','Standard formats']},
+    'executive-x':{stats:[['2','roles: engineering intern → BI analyst'],['5','core report areas: GMV · NMV · subs · DAU/MAU · funnel'],['1','Laravel → Django migration']],
+                   focus:['KPI definition','Data Studio reporting','Financial statements','Python Django']}
+  };
+  var expItems=$$('#experience .exp-item');
+  if(expItems.length){
+    var list=expItems[0].parentNode; list.classList.add('mw-tl');
+    var nowYear=new Date().getFullYear()+new Date().getMonth()/12, maxDur=0;
+    var meta=expItems.map(function(it){
+      var yr=(($('.exp-year',it)||{}).textContent||''), m=yr.match(/(\d{4})\s*[—–-]\s*(\d{4}|present)/i);
+      var isNow=!!(m&&/present/i.test(m[2])), d=m?((isNow?nowYear:+m[2])-(+m[1])):0; if(d>maxDur) maxDur=d;
+      return {it:it,isNow:isNow,d:d};
+    });
+    var allBtn=el('button','mw-expand-all','expand all details'); allBtn.type='button';
+    list.parentNode.insertBefore(allBtn,list);
+    var setOpen=function(it,open){ it.classList.toggle('mw-open',open); var b=$('.mw-more',it); if(b){ b.setAttribute('aria-expanded',open?'true':'false'); b.firstChild.nodeValue=open?'hide details':'show details ('+$$('.exp-points li',it).length+')'; } };
+    meta.forEach(function(mt){
+      var it=mt.it, left=it.children[0], right=it.children[1]; if(!left||!right) return;
+      if(mt.isNow) it.classList.add('mw-now');
+      var dur=el('span','mw-dur',(Math.round(mt.d*10)/10).toString().replace(/\.0$/,'')+(mt.d>=1.05||mt.d<0.95?' years':' year')+(mt.isNow?' · ongoing':''));
+      var db=el('div','mw-durbar','<i style="--w:'+(maxDur?mt.d/maxDur*100:0)+'%"></i>');
+      left.appendChild(dur); left.appendChild(db);
+      onView(db,function(){ db.classList.add('go'); },0.5);
+      var key=(($('.exp-company',it)||{}).textContent||'').trim().toLowerCase(), v=VIS[key];
+      if(v){
+        var stats=el('div','mw-stats',v.stats.map(function(s){
+          var parts=s[1].split('|'), unit=parts.length>1?parts[0]:'', label=parts.length>1?parts[1]:parts[0];
+          var isNum=/^\d+$/.test(s[0]);
+          return '<div class="mw-stat"><b>'+(isNum?'<span class="mw-cnt" data-v="'+s[0]+'">'+s[0]+'</span>':esc(s[0]))+(unit?'<em>'+esc(unit)+'</em>':'')+'</b><span>'+esc(label)+'</span></div>';
+        }).join(''));
+        var focus=el('div','mw-focus',v.focus.map(function(f){ return '<span>'+esc(f)+'</span>'; }).join(''));
+        right.insertBefore(focus,right.firstChild); right.insertBefore(stats,right.firstChild);
+        if(!reduce) onView(stats,function(){
+          $$('.mw-cnt',stats).forEach(function(c,k){ var tgt=+c.getAttribute('data-v'), t0=performance.now()+k*120; c.textContent='0';
+            requestAnimationFrame(function f(t){ var p=Math.min(1,Math.max(0,(t-t0)/1100)); c.textContent=String(Math.round(tgt*(1-Math.pow(1-p,3)))); if(p<1) requestAnimationFrame(f); }); });
+        },0.4);
+      }
+      var pts=$('.exp-points',it);
+      if(pts){
+        var more=el('button','mw-more','show details'); more.type='button';
+        pts.parentNode.insertBefore(more,pts);
+        more.addEventListener('click',function(){ setOpen(it,!it.classList.contains('mw-open')); });
+        setOpen(it,false);
+      }
+    });
+    allBtn.addEventListener('click',function(){
+      var open=!meta.every(function(m){ return m.it.classList.contains('mw-open'); });
+      meta.forEach(function(m){ setOpen(m.it,open); }); allBtn.textContent=open?'collapse all':'expand all details';
+    });
+  }
+})();
+</script>
+<!-- ===================== end interactive enhancements ===================== -->
+
 </body>
 </html>
